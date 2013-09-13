@@ -100,7 +100,7 @@
       for (i=0; i < this.books.length; i += 1) {
         var book = this.books[i];
         if (book.title === title) {
-          return book
+          return book;
         } 
       }
     };
@@ -109,8 +109,24 @@
       for (i = 0; i < this.books.length; i += 1) {
         var book = this.books[i];
         var newBooksHtml = bookTemplate(book);
-      $('#library').append(newBooksHtml);
-    } 
+        $('#library').append(newBooksHtml);
+      } 
+    };
+    this.checkOutBook = function (title) {
+      for (i = 0; i < this.books.length; i += 1) {
+        var book = this.books[i];
+        if (book.title === title) {
+          if (book.status === 'Available') {
+            book.status = 'Checked Out';
+            this.render();
+            return book;
+          }
+          else {
+            return null;
+          }
+          
+        }
+      }
     };
   };
 
@@ -135,6 +151,13 @@
   console.log('Book status should be available:', book.status);
 
   lib.render();
+  
+  var book_out = lib.checkOutBook('Test Title 1');
+  console.log(book_out);
+  console.log('Book status should be Checked Out:', book_out.status);
+  var book_out2 = lib.checkOutBook('Test Title 1');
+  console.log(book_out2);
+  
 
   $('#add-book').on('click', function () {
     lib.addBook ({
