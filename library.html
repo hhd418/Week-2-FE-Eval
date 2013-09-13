@@ -52,40 +52,96 @@
   var bookTemplateHtml = $('#templates .book').html();
   var bookTemplate = _.template(bookTemplateHtml);
 
-  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'Available' });
-  $('#library').append(newBookHtml);
+  // var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'Available' });
+  // $('#library').append(newBookHtml);
 
-  var books = [
-    {
-      title: 'Javascript',
-      author: 'Gilbert',
-      status: 'Available'
-    },
-    {
-      title: 'Ruby',
-      author: 'Matt',
-      status: 'Available'
-    }
-  ];
+  // var books = [
+  //   {
+  //     title: 'Javascript',
+  //     author: 'Gilbert',
+  //     status: 'Available'
+  //   },
+  //   {
+  //     title: 'Ruby',
+  //     author: 'Matt',
+  //     status: 'Available'
+  //   }
+  // ];
 
-  var renderLibrary = function () {
-    $('#library').empty();
-    for (i = 0; i < books.length; i += 1) {
-      var book = books[i];
-      var newBooksHtml = bookTemplate(book);
+  // var renderLibrary = function () {
+  //   $('#library').empty();
+  //   for (i = 0; i < books.length; i += 1) {
+  //     var book = books[i];
+  //     var newBooksHtml = bookTemplate(book);
+  //     $('#library').append(newBooksHtml);
+  //   } 
+  // };
+
+  // renderLibrary();
+
+  // $('#add-book').on('click', function () {
+  //   books.push ({
+  //     title: $('#title').val(),
+  //     author: $('#author').val(),
+  //     status: 'Available'
+  //   });
+  //   renderLibrary();
+  //   $('#title').val('');
+  //   $('#author').val('');
+  // });
+
+  var Library = function () {
+    this.books = [];
+    this.addBook = function (book) {
+      book.status = 'Available';
+      this.books.push(book);
+    };
+    this.getBook = function (title) {
+      for (i=0; i < this.books.length; i += 1) {
+        var book = this.books[i];
+        if (book.title === title) {
+          return book
+        } 
+      }
+    };
+    this.render = function () {
+      $('#library').empty();
+      for (i = 0; i < this.books.length; i += 1) {
+        var book = this.books[i];
+        var newBooksHtml = bookTemplate(book);
       $('#library').append(newBooksHtml);
     } 
+    };
   };
 
-  renderLibrary();
+
+  var lib = new Library();
+  console.log('New library:', lib);
+
+  lib.addBook({
+    title: 'Test Title 1',
+    author: 'Author 1'
+  });
+  console.log('# of books should be 1:', lib.books.length);
+  
+  lib.addBook({
+    title: 'Test Title 2',
+    author: 'Author 2'
+  });
+  console.log('# of books should be 2:', lib.books.length);
+
+  var book = lib.getBook('Test Title 1');
+  console.log('The book should exist:', book);
+  console.log('Book status should be available:', book.status);
+
+  lib.render();
 
   $('#add-book').on('click', function () {
-    books.push ({
+    lib.addBook ({
       title: $('#title').val(),
       author: $('#author').val(),
-      status: 'Available'
     });
-    renderLibrary();
+    lib.render();
     $('#title').val('');
     $('#author').val('');
   });
