@@ -61,11 +61,15 @@
     }
   ];
 
-  for (i = 0; i < books.length; i += 1) {
-    var book = books[i];
-    var newBooksHtml = bookTemplate(book);
-    $('#library').append(newBooksHtml);
-  }
+  var renderLibrary = function () {
+    for (i = 0; i < books.length; i += 1) {
+      var book = books[i];
+      var newBooksHtml = bookTemplate(book);
+      $('#library').append(newBooksHtml);
+    }
+  };
+
+  renderLibrary();
    
 </script>
 
