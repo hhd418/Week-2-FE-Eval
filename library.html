@@ -45,8 +45,27 @@
   var bookTemplateHtml = $('#templates .book').html();
   var bookTemplate = _.template(bookTemplateHtml);
 
-  var newBookHtml = bookTemplate({ title: 'drew', author: 'tess', status: 'available'});
+  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'available'});
   $('#library').append(newBookHtml);
+
+  var books = [
+    {
+      title: 'Javascript',
+      author: 'Gilbert',
+      status: 'available'
+    },
+    {
+      title: 'Ruby',
+      author: 'Matt',
+      status: 'available'
+    }
+  ];
+
+  for (i = 0; i < books.length; i += 1) {
+    var book = books[i];
+    var newBooksHtml = bookTemplate(book);
+    $('#library').append(newBooksHtml);
+  }
    
 </script>
 
