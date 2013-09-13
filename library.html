@@ -27,12 +27,27 @@
 
 <div id="templates">
 
+  <script class="book" type="text/template">
+
+    <div class="book">
+      <p>Book Title: <%= title %></p>
+      <p>Book Author: <%= author %></p>
+      <p>Status: <%= status %></p>
+    </div>
+
+  </script>
+
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script type="text/javascript">
-  // TODO
+  var bookTemplateHtml = $('#templates .book').html();
+  var bookTemplate = _.template(bookTemplateHtml);
+
+  var newBookHtml = bookTemplate({ title: 'drew', author: 'tess', status: 'available'});
+  $('#library').append(newBookHtml);
+   
 </script>
 
 <small>It's back.</small>
