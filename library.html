@@ -69,22 +69,23 @@
   ];
 
   var renderLibrary = function () {
+    $('#library').empty();
     for (i = 0; i < books.length; i += 1) {
       var book = books[i];
       var newBooksHtml = bookTemplate(book);
       $('#library').append(newBooksHtml);
-    }
+    } 
   };
 
   renderLibrary();
 
   $('#add-book').on('click', function () {
-    var newestBookHtml = bookTemplate({
+    books.push ({
       title: $('#title').val(),
       author: $('#author').val(),
       status: 'Available'
     });
-    $('#library').append(newestBookHtml);
+    renderLibrary();
     $('#title').val('');
     $('#author').val('');
   });
