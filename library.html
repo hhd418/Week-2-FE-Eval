@@ -52,7 +52,7 @@
   var bookTemplateHtml = $('#templates .book').html();
   var bookTemplate = _.template(bookTemplateHtml);
 
-  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'Available'});
+  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'Available' });
   $('#library').append(newBookHtml);
 
   var books = [
@@ -79,7 +79,11 @@
   renderLibrary();
 
   $('#add-book').on('click', function () {
-    var newestBookHtml = bookTemplate({ title: $('#title').val(), author: $('#author').val(), status: 'Available'});
+    var newestBookHtml = bookTemplate({
+      title: $('#title').val(),
+      author: $('#author').val(),
+      status: 'Available'
+    });
     $('#library').append(newestBookHtml);
     $('#title').val('');
     $('#author').val('');
