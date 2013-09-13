@@ -40,6 +40,7 @@
       <p>Book Title: <%= title %></p>
       <p>Book Author: <%= author %></p>
       <p>Status: <%= status %></p>
+      <p><input class='check-out' type='button' value='Check Out' data-title='<%= title %>' />
     </div>
 
   </script>
@@ -152,11 +153,11 @@
 
   lib.render();
   
-  var book_out = lib.checkOutBook('Test Title 1');
-  console.log(book_out);
-  console.log('Book status should be Checked Out:', book_out.status);
-  var book_out2 = lib.checkOutBook('Test Title 1');
-  console.log(book_out2);
+  // var book_out = lib.checkOutBook('Test Title 1');
+  // console.log(book_out);
+  // console.log('Book status should be Checked Out:', book_out.status);
+  // var book_out2 = lib.checkOutBook('Test Title 1');
+  // console.log(book_out2);
   
 
   $('#add-book').on('click', function () {
@@ -169,6 +170,9 @@
     $('#author').val('');
   });
    
+  $(document).on('click', '.check-out', function () {
+    lib.checkOutBook($(this).data('title'));
+  });
 </script>
 
 <small>It's back.</small>
