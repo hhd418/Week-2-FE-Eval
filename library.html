@@ -21,6 +21,13 @@
 <body>
 
 <h1>THE LIBRARY</h1>
+<label>Title:</label>
+<input id='title' type="text"/>
+<br />
+<label>Author:</label>
+<input id='author' type='text'/>
+<br />
+<input id='add-book' type='button' value='Add Book'/>
 
 
 <div id="library"></div>
@@ -45,19 +52,19 @@
   var bookTemplateHtml = $('#templates .book').html();
   var bookTemplate = _.template(bookTemplateHtml);
 
-  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'available'});
+  var newBookHtml = bookTemplate({ title: 'Test', author: 'Drew', status: 'Available'});
   $('#library').append(newBookHtml);
 
   var books = [
     {
       title: 'Javascript',
       author: 'Gilbert',
-      status: 'available'
+      status: 'Available'
     },
     {
       title: 'Ruby',
       author: 'Matt',
-      status: 'available'
+      status: 'Available'
     }
   ];
 
@@ -70,6 +77,13 @@
   };
 
   renderLibrary();
+
+  $('#add-book').on('click', function () {
+    var newestBookHtml = bookTemplate({ title: $('#title').val(), author: $('#author').val(), status: 'Available'});
+    $('#library').append(newestBookHtml);
+    $('#title').val('');
+    $('#author').val('');
+  });
    
 </script>
 
